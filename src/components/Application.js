@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
+// import { getAppointmentsForDay } from "helpers/selectors";
+
 import DayList from "components/DayList";
 import "components/Application.scss";
 
@@ -83,15 +85,28 @@ const appointments = [
 //   },
 // ]; 
 
+// const setDay = day => setState({ ...state, day });
+
 export default function Application(props) {
 
-  const [days, setDays] = useState([])
+  // const [days, setDays] = useState([])
+
+  const [state, setState] = useState({
+    day: "Monday",
+    days: [],
+    appointments: {}
+  });
+  
+  const setDay = day => setState({...state, day});
+  const setDays = days => setState(prev => ({...prev, days}));
 
   useEffect(() => {
     axios
-      .get('/api.days')
+      .get('/api/days')
       .then(response => setDays(response.data));
-  }, [])
+  }, []);
+
+  // const appointments = getAppointmentsForDay(state, state.day);
 
   const appointmentList = appointments.map( appointment => {
     return(
@@ -108,7 +123,6 @@ export default function Application(props) {
   return (
     <main className="layout">
       <section className="sidebar">
-        {/* Replace this with the sidebar elements during the "Environment Setup" activity. */}
         <img
           className="sidebar--centered"
           src="images/logo.png"
@@ -117,10 +131,10 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu">
         <DayList
-          // day={day}
-          days={days}
-          day={"Monday"}
-          setDay={day => console.log(day)}
+          day={state.day}
+          days={state.days}
+          // day={"Monday"}
+          setDay={setDay}
           />
         </nav>
         <img
