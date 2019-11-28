@@ -3,68 +3,68 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 
-// import { getAppointmentsForDay } from "helpers/selectors";
-
 import DayList from "components/DayList";
-import "components/Application.scss";
-
 import Appointment from "components/Appointment";
 
-const appointments = [
-  {
-    id: 1,
-    time: "12pm",
-  },
-  {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  {
-    id: 3,
-    time: "2pm",
-    interview: {
-      student: "Chris Drysdale",
-      interviewer: {
-        id: 1,
-        name: "Jamie Jones",
-        avatar: "https://i.imgur.com/twYrpay.jpg",
-      }
-    }
-  },
-  {
-    id: 4,
-    time: "3pm",
-    interview: {
-      student: "Emma Watts",
-      interviewer: {
-        id: 1,
-        name: "Autumn Fall",
-        avatar: "https://i.imgur.com/imgur.jpg",
-      }
-    }
-  },
-  {
-    id: 5,
-    time: "4pm",
-    interview: {
-      student: "Hilda Lighthosue",
-      interviewer: {
-        id: 2,
-        name: "Jess Apple",
-        avatar: "https://i.imgur.com/Nmx0Qxo.png",
-      }
-    }
-  }
+import { getAppointmentsForDay } from "helpers/selectors";
 
-];
+import "components/Application.scss";
+
+// const appointments = [
+//   {
+//     id: 1,
+//     time: "12pm",
+//   },
+//   {
+//     id: 2,
+//     time: "1pm",
+//     interview: {
+//       student: "Lydia Miller-Jones",
+//       interviewer: {
+//         id: 1,
+//         name: "Sylvia Palmer",
+//         avatar: "https://i.imgur.com/LpaY82x.png",
+//       }
+//     }
+//   },
+//   {
+//     id: 3,
+//     time: "2pm",
+//     interview: {
+//       student: "Chris Drysdale",
+//       interviewer: {
+//         id: 1,
+//         name: "Jamie Jones",
+//         avatar: "https://i.imgur.com/twYrpay.jpg",
+//       }
+//     }
+//   },
+//   {
+//     id: 4,
+//     time: "3pm",
+//     interview: {
+//       student: "Emma Watts",
+//       interviewer: {
+//         id: 1,
+//         name: "Autumn Fall",
+//         avatar: "https://i.imgur.com/imgur.jpg",
+//       }
+//     }
+//   },
+//   {
+//     id: 5,
+//     time: "4pm",
+//     interview: {
+//       student: "Hilda Lighthosue",
+//       interviewer: {
+//         id: 2,
+//         name: "Jess Apple",
+//         avatar: "https://i.imgur.com/Nmx0Qxo.png",
+//       }
+//     }
+//   }
+
+// ];
 
 
 // const days = [
@@ -98,13 +98,30 @@ export default function Application(props) {
   });
   
   const setDay = day => setState({...state, day});
-  const setDays = days => setState(prev => ({...prev, days}));
+
+  // const setDays = days => setState(prev => ({...prev, days}));
+  // useEffect(() => {
+  //   axios
+  //     .get('/api/days')
+  //     .then(response => setDays(response.data));
+  // }, []);
+
+  const appointments = getAppointmentsForDay(state, state.day);
 
   useEffect(() => {
-    axios
-      .get('/api/days')
-      .then(response => setDays(response.data));
+    Promise.all([
+      Promise.resolve(axios.get("/api/days")),
+      Promise.resolve(axios.get("/api/appointments")),
+     ])
+    .then(response => {
+      console.log(response[0], response[1])
+      setState(prev => ({...prev, 
+        days: response[0].data,
+        appointments: response[1].data,
+      }))
+    });
   }, []);
+
 
   // const appointments = getAppointmentsForDay(state, state.day);
 
