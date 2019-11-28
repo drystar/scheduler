@@ -1,5 +1,7 @@
 import React from "react";
+
 import "components/InterviewerList.scss";
+import "components/InterviewerListItem.scss";
 
 import InterviewerListItem from "components/InterviewerListItem";
 
@@ -11,7 +13,7 @@ export default function InterviewerList(props) {
         name={interviewer.name}
         avatar={interviewer.avatar}
         selected={props.value === interviewer.id}
-        setInterviewer={() => props.onChange(interviewer.id)}
+        setInterviewer={(event) => props.onChange(interviewer.id)}
       />
     );
   });

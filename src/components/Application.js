@@ -6,9 +6,7 @@ import "components/Application.scss";
 import DayList from "components/DayList";
 import Appointment from "components/Appointment";
 
-import { getAppointmentsForDay } from "helpers/selectors";
-import { getInterview } from "helpers/selectors";
-
+import { getAppointmentsForDay, getInterview, getInterviewersForDay } from "helpers/selectors";
 
 export default function Application(props) {
 
@@ -16,25 +14,11 @@ export default function Application(props) {
     day: "Monday",
     days: [],
     appointments: {},
-    interviewers: {}
-  });
+    interview: {},
+    interviewers: {},
+  })
   
-  const setDay = day => setState({...state, day});
-
-  const appointments = getAppointmentsForDay(state, state.day);
-
-  const schedule = appointments.map(appointment => {
-    const interview = getInterview(state, appointment.interview);
-
-    return(
-      <Appointment 
-        key={appointment.id}
-        id={appointment.id}
-        time={appointment.time}
-        interview={interview}
-      />
-    );
-  });
+  const setDay = day => setState(currentState => ({ ...currentState, day }));
 
   useEffect(() => {
     Promise.all([
@@ -43,14 +27,34 @@ export default function Application(props) {
       Promise.resolve(axios.get("/api/interviewers")),
      ])
     .then(response => {
-      console.log(response[0], response[1])
-      setState(prev => ({...prev, 
+      // console.log(response[0], response[1])
+      setState(state => ({...state, 
         days: response[0].data,
         appointments: response[1].data,
         interviewers: response[2].data,
       }))
-    });
+    })
   }, []);
+
+  // const appointments = getAppointmentsForDay(state, state.day);
+
+
+  // console.log(state.day)
+  const schedule = getAppointmentsForDay(state, state.day).map(appointment => {
+    const interview = getInterview(state, appointment.interview);
+    const interviewers = getInterviewersForDay(state, state.day);
+
+    return(
+      <Appointment 
+        key={appointment.id}
+        id={appointment.id}
+        time={appointment.time}
+        interview={interview}
+        interviewers={interviewers}
+        interviewers={getInterviewersForDay(state, state.day)}
+      />
+      )
+    });
 
 
   return (
