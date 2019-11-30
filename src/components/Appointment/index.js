@@ -19,7 +19,7 @@ export default function Appointment(props) {
   const SAVING = "SAVING";
   const EDITING = "EDITING";
   const DELETING = "DELETING";
-  const CONFRIM = "CONFIRM";
+  const CONFIRM = "CONFIRM";
   const ERROR_SAVE = "ERROR_SAVE";
   const ERROR_DELETE = "ERROR_DELETE";
 
@@ -40,16 +40,16 @@ export default function Appointment(props) {
         transition(SHOW);
       })
       .catch(error => {
-        transition(ERROR_SAVE);
+        transition(ERROR_SAVE, true);
       });
   }
 
   function confirmation() {
-    transition(CONFRIM);
+    transition(CONFIRM, true);
   }
 
   function cancel() {
-    transition(DELETING);
+    transition(DELETING, true);
 
     props
       .cancelInterview(props.id)
@@ -57,7 +57,7 @@ export default function Appointment(props) {
         transition(EMPTY);
       })
       .catch(error => {
-        transition(ERROR_DELETE);
+        transition(ERROR_DELETE, true);
       });
   }
 
@@ -88,13 +88,13 @@ export default function Appointment(props) {
       )}
       {mode === SAVING && <Status message="Saving" />}
       {mode === ERROR_SAVE && (
-        <Error message="Error Saving appointment" onSave={() => back()} />
+        <Error message="Error Saving Appointment" onClose={() => back()} />
       )}
       {mode === DELETING && <Status message="Deleting" />}
       {mode === ERROR_DELETE && (
-        <Error message="Error deleting appointment" onDelete={() => back()} />
+        <Error message="Error Deleting Appointment" onClose={() => back()} />
       )}
-      {mode === CONFRIM && (
+      {mode === CONFIRM && (
         <Confirm
           message="Are you sure you would like to delete?"
           onCancel={() => back()}
