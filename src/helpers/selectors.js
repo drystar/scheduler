@@ -39,3 +39,14 @@ export function getInterviewersForDay(state, day) {
   }
   return interviewers;
 }
+
+// // getDayForAppointment
+
+// export function getDayForAppointment(state, appointmentId) => {
+//   if (appointmentId === null)
+//   return null;
+
+//   const appointmentDay = state.days
+
+//   return day.appointments
+// }
