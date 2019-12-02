@@ -1,7 +1,6 @@
 import { useEffect, useReducer } from "react";
 
 import axios from "axios";
-import { statement } from "@babel/template";
 
 const SET_DAY = "SET_DAY";
 const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
@@ -82,13 +81,6 @@ export default function useApplicationData() {
       Promise.resolve(axios.get("/api/days")),
       Promise.resolve(axios.get("/api/appointments")),
       Promise.resolve(axios.get("/api/interviewers"))
-      // ]).then() => {
-      // setState(state => ({
-      //   ...state,
-      //   days: response[0].data,
-      //   appointments: response[1].data,
-      //   interviewers: response[2].data
-      // }));
     ]).then(response => {
       dispatch({
         type: SET_APPLICATION_DATA,
@@ -110,10 +102,6 @@ export default function useApplicationData() {
       [id]: appointment
     };
 
-    // setState({
-    //   ...state,
-    //   appointments
-    // });
     return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
       dispatch({ type: SET_INTERVIEW, id, interview });
     });
@@ -130,10 +118,6 @@ export default function useApplicationData() {
       [id]: nullAppointment
     };
 
-    // setState({
-    //   ...state,
-    //   appointments
-    // });
     return axios.delete(`/api/appointments/${id}`).then(() => {
       dispatch({ type: SET_INTERVIEW, id, interview: null });
     });
