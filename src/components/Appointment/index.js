@@ -2,13 +2,13 @@ import React from "react";
 
 import "components/Appointment/styles.scss";
 
-import Empty from "components/Appointment/empty";
-import Header from "components/Appointment/header";
-import Show from "components/Appointment/show";
-import Form from "components/Appointment/form";
-import Status from "components/Appointment/status";
+import Empty from "components/Appointment/Empty";
+import Header from "components/Appointment/Header";
+import Show from "components/Appointment/Show";
+import Form from "components/Appointment/Form";
+import Status from "components/Appointment/Status";
 import Confirm from "components/Appointment/confirm";
-import Error from "components/Appointment/error";
+import Error from "components/Appointment/Error";
 
 import useVisualMode from "hooks/useVisualMode";
 
