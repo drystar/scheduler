@@ -7,6 +7,7 @@ const SET_APPLICATION_DATA = "SET_APPLICATION_DATA";
 const SET_INTERVIEW = "SET_INTERVIEW";
 
 function getSpotsRemainingForDay(day, appointments) {
+  console.log("**** callling real api");
   let spotsForThisDay = day.appointments;
   let freeSpots = 0;
   // go through each spot for this day
