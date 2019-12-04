@@ -6,10 +6,7 @@ function getSpotsRemainingForDay(day, appointments) {
   console.log("**** callling real api");
   let spotsForThisDay = day.appointments;
   let freeSpots = 0;
-  // go through each spot for this day
   for (const spot of spotsForThisDay) {
-    // if that spot's appointment's interview is null:
-    // that spot is free; increment freeSpots
     if (appointments[spot].interview === null) {
       freeSpots++;
     }
@@ -30,7 +27,6 @@ export default function reducer(state, action) {
       return {
         ...state,
         day: action.day
-        // spots: action.decorateDaysWithSpots
       };
     }
     case SET_APPLICATION_DATA:
@@ -60,6 +56,5 @@ export default function reducer(state, action) {
       throw new Error(
         `Tried to reduce with unsupported action type: ${action.type}`
       );
-    // return state;
   }
 }

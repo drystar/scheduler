@@ -45,7 +45,6 @@ describe("Application", () => {
     fireEvent.click(getByText(appointment, "Save"));
 
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
-    // expect(getByText(appointment, "Saving")).not.toBeInTheDocument();
 
     await waitForElement(() => queryByText(appointment, "Lydia Miller-Jones"));
 
