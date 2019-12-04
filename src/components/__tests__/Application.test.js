@@ -16,8 +16,6 @@ import {
 
 import Application from "components/Application";
 
-jest.mock("axios");
-
 afterEach(cleanup);
 
 describe("Application", () => {
@@ -96,13 +94,13 @@ describe("Application", () => {
     await waitForElement(() => getByDisplayValue(appointment, "Archie Cohen"));
 
     fireEvent.change(getByDisplayValue(appointment, "Archie Cohen"), {
-      target: { value: "Test New" }
+      target: { value: "Cohen Archie" }
     });
 
     fireEvent.click(getByText(appointment, "Save"));
 
     expect(getByText(appointment, "Saving")).toBeInTheDocument();
-    await waitForElement(() => queryByText(appointment, "Test New"));
+    await waitForElement(() => queryByText(appointment, "Cohen Archie"));
 
     const day = getAllByTestId(container, "day").find(day =>
       queryByText(day, "Monday")

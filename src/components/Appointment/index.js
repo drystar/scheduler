@@ -7,7 +7,7 @@ import Header from "components/Appointment/Header";
 import Show from "components/Appointment/Show";
 import Form from "components/Appointment/Form";
 import Status from "components/Appointment/Status";
-import Confirm from "components/Appointment/confirm";
+import Confirm from "components/Appointment/Confirm";
 import Error from "components/Appointment/Error";
 
 import useVisualMode from "hooks/useVisualMode";
@@ -62,7 +62,7 @@ export default function Appointment(props) {
   }
 
   return (
-    <article className="appointment" data-testid="appointments">
+    <article data-testid="appointments" className="appointment">
       <Header time={props.time} />
       {mode === EMPTY && (
         <Empty
