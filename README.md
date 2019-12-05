@@ -11,6 +11,11 @@ Both servers run concurrently; requests are proxied from the Webpack development
   The client application communicates with an API server over HTTP, using the JSON format.
 - Jest tests are used through the development of the project.
 
+# Screenshots illustrating select App Behaviour
+!["Save - status"] (https://github.com/drystar/scheduler/blob/master/docs/save_status.png)
+!["Confirm - status"] (https://github.com/drystar/scheduler/blob/master/docs/confirm_delete.png)
+!["Delete - status"] (https://github.com/drystar/scheduler/blob/master/docs/delete_status.png)
+
 # App Behaviour
 
 - Interviews can be booked between Monday and Friday.
