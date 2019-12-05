@@ -12,9 +12,12 @@ Both servers run concurrently; requests are proxied from the Webpack development
 - Jest tests are used through the development of the project.
 
 # Screenshots illustrating select App Behaviour
-!["Save - status"] (https://github.com/drystar/scheduler/blob/master/docs/save_status.png?raw=true)
-!["Confirm - status"] (https://github.com/drystar/scheduler/blob/master/docs/confirm_delete.png?raw=true)
-!["Delete - status"] (https://github.com/drystar/scheduler/blob/master/docs/delete_status.png?raw=true)
+
+!["save_status"](https://github.com/drystar/scheduler/blob/master/docs/save_status.png?raw=true)
+
+!["confirm_alert"](https://github.com/drystar/scheduler/blob/master/docs/confirm_delete.png?raw=true)
+
+!["delete_status"](https://github.com/drystar/scheduler/blob/master/docs/delete_status.png?raw=true)
 
 # App Behaviour
 
