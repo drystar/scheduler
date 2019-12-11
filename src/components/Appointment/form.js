@@ -21,8 +21,8 @@ export default function Form(props) {
 
   //FORM VALIDATE & ERROR TRACKING
   function validate() {
-    if (name === "") {
-      setError("Student name cannot be blank");
+    if (name === "" || interviewer === null) {
+      setError("Please enter a student name and/ or select an interviewer");
       return;
     }
     setError("");
