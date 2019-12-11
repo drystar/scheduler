@@ -1,4 +1,4 @@
-import "components/Button/Button";
+import "components/Button/Button.scss";
 import React from "react";
 const classNames = require("classnames");
 

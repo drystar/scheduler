@@ -1,4 +1,4 @@
-import "components/InterviewerListItem/InterviewerListItem";
+import "components/InterviewerListItem/InterviewerListItem.scss";
 import React from "react";
 
 const classNames = require("classnames");

@@ -1,7 +1,7 @@
 import React from "react";
 
-import "components/InterviewerList/InterviewerList";
-import "components/InterviewerListItem/InterviewerListItem";
+import "components/InterviewerList/InterviewerList.scss";
+import "components/InterviewerListItem/InterviewerListItem.scss";
 
 import PropTypes from "prop-types";
 
