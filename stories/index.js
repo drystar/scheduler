@@ -5,11 +5,11 @@ import { action } from "@storybook/addon-actions";
 
 import "index.scss";
 
-import Button from "components/Button";
-import DayListItem from "components/DayListItem";
-import DayList from "components/DayList";
-import InterviewerListItem from "components/InterviewerListItem";
-import InterviewerList from "components/InterviewerList";
+import Button from "components/Button/Button";
+import DayListItem from "components/DayListItem/DayListItem";
+import DayList from "components/DayList/DayList";
+import InterviewerListItem from "components/InterviewerListItem/InterviewerListItem";
+import InterviewerList from "components/InterviewerList/InterviewerList";
 import Appointment from "components/Appointment";
 import Header from "components/Appointment/Header";
 import Empty from "components/Appointment/Empty";

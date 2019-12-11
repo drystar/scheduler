@@ -4,7 +4,7 @@ import useApplicationData from "hooks/useApplicationData";
 
 import "components/Application.scss";
 
-import DayList from "components/DayList";
+import DayList from "components/DayList/DayList";
 import Appointment from "components/Appointment";
 
 import {
