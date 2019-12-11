@@ -21,10 +21,6 @@ export default function Form(props) {
 
   //FORM VALIDATE & ERROR TRACKING
   function validate() {
-    // if (!name || !interviewer) {
-    //   setError("Please enter a student name AND select an interviewer");
-    //   return;
-    // }
     if (!name) {
       setError("Please enter a student name AND select an interviewer");
       return;
