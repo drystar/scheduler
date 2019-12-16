@@ -3,13 +3,13 @@ import React from "react";
 
 import "components/Appointment/styles.scss";
 
-import Empty from "components/Appointment/Empty1";
-import Header from "components/Appointment/Header1";
-import Show from "components/Appointment/Show1";
-import Form from "components/Appointment/Form1";
-import Status from "components/Appointment/Status1";
-import Confirm from "components/Appointment/Confirm1";
-import Error from "components/Appointment/Error1";
+import Empty from "components/Appointment/Empty";
+import Header from "components/Appointment/Header";
+import Show from "components/Appointment/Show";
+import Form from "components/Appointment/Form";
+import Status from "components/Appointment/Status";
+import Confirm from "components/Appointment/Confirm";
+import Error from "components/Appointment/Error";
 
 import useVisualMode from "hooks/useVisualMode";
 
