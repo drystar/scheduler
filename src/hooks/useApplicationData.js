@@ -24,14 +24,25 @@ export default function useApplicationData() {
       Promise.resolve(axios.get("/api/days")),
       Promise.resolve(axios.get("/api/appointments")),
       Promise.resolve(axios.get("/api/interviewers"))
-    ]).then(response => {
-      dispatch({
-        type: SET_APPLICATION_DATA,
-        days: response[0].data,
-        appointments: response[1].data,
-        interviewers: response[2].data
-      });
-    });
+    ])
+      .then(response => {
+        dispatch({
+          type: SET_APPLICATION_DATA,
+          days: response[0].data,
+          appointments: response[1].data,
+          interviewers: response[2].data
+        });
+      })
+      .then(() => {
+        const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
+        websocket.onopen = function(e) {
+          webSocket.send("ping");
+        };
+        webSocket.onmessage = function(e) {
+          console.log("Message Received: ", e.data);
+        };
+      })
+      .catch(error => console.log(error));
   }, []);
 
   function bookInterview(id, interview) {
