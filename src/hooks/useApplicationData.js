@@ -35,47 +35,59 @@ export default function useApplicationData() {
       })
       .then(() => {
         const webSocket = new WebSocket(process.env.REACT_APP_WEBSOCKET_URL);
-        websocket.onopen = function(e) {
+        webSocket.onopen = function(e) {
           webSocket.send("ping");
         };
         webSocket.onmessage = function(e) {
+          const received = JSON.parse(e.data);
           console.log("Message Received: ", e.data);
-        };
-      })
-      .catch(error => console.log(error));
-  }, []);
 
-  function bookInterview(id, interview) {
-    const appointment = {
-      ...state.appointments[id],
-      interview: { ...interview }
-    };
+          if (received.type === "SET_INTERVIEW") {
+            const updated = {
+              ...state.appointment[received.id],
+              interview: received.interview
+            };
+            const updateAppointments = {
+              ...state.appointments,
+              [received.id]: updated
+            };
+            dispatch({ type: SET_INTERVIEW, value: updateAppointments });
+          }
+        }.catch(error => console.log(error));
+      }, []);
 
-    const appointments = {
-      ...state.appointments,
-      [id]: appointment
-    };
+    function bookInterview(id, interview) {
+      const appointment = {
+        ...state.appointments[id],
+        interview: { ...interview }
+      };
 
-    return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
-      dispatch({ type: SET_INTERVIEW, id, interview });
-    });
-  }
+      const appointments = {
+        ...state.appointments,
+        [id]: appointment
+      };
 
-  function cancelInterview(id) {
-    const nullAppointment = {
-      ...state.appointments[id],
-      interview: { ...state.appointments[id].interview }
-    };
+      return axios.put(`/api/appointments/${id}`, { interview }).then(() => {
+        dispatch({ type: SET_INTERVIEW, id, interview });
+      });
+    }
 
-    const appointments = {
-      ...state.appointments,
-      [id]: nullAppointment
-    };
+    function cancelInterview(id) {
+      const nullAppointment = {
+        ...state.appointments[id],
+        interview: { ...state.appointments[id].interview }
+      };
 
-    return axios.delete(`/api/appointments/${id}`).then(() => {
-      dispatch({ type: SET_INTERVIEW, id, interview: null });
-    });
-  }
+      const appointments = {
+        ...state.appointments,
+        [id]: nullAppointment
+      };
 
-  return { state, setDay, bookInterview, cancelInterview };
+      return axios.delete(`/api/appointments/${id}`).then(() => {
+        dispatch({ type: SET_INTERVIEW, id, interview: null });
+      });
+    }
+
+    return { state, setDay, bookInterview, cancelInterview };
+  });
 }
